@@ -56,11 +56,30 @@ void handle(const char* data) {
         }
     }
 }
+#define MAX_LEN  100
+
+int handle01(const char* &data) {
+    int i, len;
+    char *words[MAX_LEN], *cp;
+    const char *delim = "\n";
+
+    cp = const_cast<char *>(data);
+    for (len = 0; len < MAX_LEN; len++) {
+        if ((words[len] = strtok(cp, delim)) == NULL)
+            break;
+        cp = NULL;
+    }
+    for (i=0; i<len; i++) {
+        std::string str(words[i]);
+        std::cout << "data: " << str << std::endl;
+    }
+}
 
 int main() {
     const char *data = "12345\nabcde\nfsdf\n";
 
-    handle(data);
+    handle01(data);
+
 
     return 1;
 }
